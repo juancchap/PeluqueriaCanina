@@ -2,16 +2,21 @@
 package com.mycompany.peluqueriacanina.igu;
 
 import com.mycompany.peluqueriacanina.logica.Contoladora;
+import com.mycompany.peluqueriacanina.logica.Mascota;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
 
-public class CargaDatos extends javax.swing.JFrame {
+public class EditarDatos extends javax.swing.JFrame {
 
-   Contoladora control = new Contoladora();
-    public CargaDatos() {
-        //control = new Contoladora();
+   Contoladora control = null;
+   int num_cliente;
+    Mascota masco;
+    public EditarDatos(int num_cliente) {
+        control = new Contoladora();
+        //this.num_cliente= num_cliente;
         initComponents();
+        cargarDatos(num_cliente);
     }
 
     @SuppressWarnings("unchecked")
@@ -50,7 +55,7 @@ public class CargaDatos extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Carga de Datos");
+        jLabel1.setText("Edición de Datos");
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -263,7 +268,7 @@ public class CargaDatos extends javax.swing.JFrame {
         btnGuardar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnGuardar.setForeground(new java.awt.Color(0, 0, 0));
         btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/salvar(4)(1).png"))); // NOI18N
-        btnGuardar.setText("Guardar");
+        btnGuardar.setText("Guardar Cambios");
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGuardarActionPerformed(evt);
@@ -275,23 +280,25 @@ public class CargaDatos extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 124, Short.MAX_VALUE)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(218, 218, 218))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(130, 130, 130)
-                .addComponent(btnRegresar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnLimpiar)
-                .addGap(142, 142, 142)
-                .addComponent(btnGuardar)
-                .addGap(53, 53, 53))
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 419, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(173, 173, 173))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 150, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(67, 67, 67)
+                        .addComponent(btnRegresar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnLimpiar)
+                        .addGap(91, 91, 91)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnGuardar))
+                .addGap(27, 27, 27))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -300,16 +307,14 @@ public class CargaDatos extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(35, 35, 35)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(49, 49, 49)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnLimpiar)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnRegresar)
+                    .addComponent(btnLimpiar)
                     .addComponent(btnGuardar))
-                .addGap(21, 21, 21))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -359,14 +364,15 @@ public class CargaDatos extends javax.swing.JFrame {
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         this.dispose();
+        VerDatos ver_datos = new VerDatos();
+        ver_datos.setVisible(true);
+        ver_datos.setLocationRelativeTo(null);
         
-         Principal princ = new Principal();
-         princ.setVisible(true);
-         princ.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnRegresarActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         
+        //Todos los datos de la mascota
         String nombreMasco = txtNombre.getText();
         String raza = txtRaza.getText();
         String color = txtColor.getText();
@@ -374,30 +380,41 @@ public class CargaDatos extends javax.swing.JFrame {
         String alergico =(String) cmbAlergico.getSelectedItem();
         String atenEsp =(String) cmbAtencionEspecial.getSelectedItem();
         
+        //Datos del dueño
         String nombreDueño = txtNombreDueño.getText();
         String cellDueño = txtCelDueño.getText();
                
         
-        control.guardar(nombreMasco,raza,color,observaciones,alergico,atenEsp,nombreDueño,cellDueño);
+        control.modificarMascota(masco,nombreMasco,raza,color,observaciones,alergico,atenEsp,nombreDueño,cellDueño);
         
-         JOptionPane optionPane = new JOptionPane("Se guardó Correctamente");
-         optionPane.setMessageType(JOptionPane.INFORMATION_MESSAGE);
-         JDialog dialog = optionPane.createDialog("Guardado Exitoso");
-         dialog.setAlwaysOnTop(true);
-         dialog.setVisible(true);
-         
-         this.dispose();
-         
-         Principal pantalla = new Principal();
+        //mensaje de que todo salio bien
+        mostrarMensaje("Edicion realizada correctamente","Info","Edicion correcta");
+        VerDatos pantalla = new VerDatos();
         pantalla.setVisible(true);
         pantalla.setLocationRelativeTo(null);
+        this.dispose();
         
+         
          
          
         
         
     }//GEN-LAST:event_btnGuardarActionPerformed
 
+    
+    public void mostrarMensaje(String mensaje, String tipo, String Titulo) {
+        JOptionPane optionPane = new JOptionPane(mensaje);
+        if (tipo.equals("Info"))
+        {
+            optionPane.setMessageType(JOptionPane.INFORMATION_MESSAGE);
+        } else if (tipo.equals("Error"))
+        {
+            optionPane.setMessageType(JOptionPane.ERROR_MESSAGE);
+        }
+        JDialog dialog = optionPane.createDialog(Titulo);
+        dialog.setAlwaysOnTop(true);
+        dialog.setVisible(true);
+    }
    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -427,4 +444,39 @@ public class CargaDatos extends javax.swing.JFrame {
     private javax.swing.JTextArea txtObservaciones;
     private javax.swing.JTextField txtRaza;
     // End of variables declaration//GEN-END:variables
-}
+
+    public void cargarDatos(int num_cliente) {
+         
+        this.masco=control.traerMascotas(num_cliente);    
+        
+         txtNombre.setText(masco.getNombre());
+        txtRaza.setText(masco.getRaza());
+        txtColor.setText(masco.getColor());        
+        txtObservaciones.setText(masco.getObservaciones());
+        txtNombreDueño.setText(masco.getUn_Dueño().getNombre());
+        txtCelDueño.setText(masco.getUn_Dueño().getCelDueño());
+        
+       if(masco.getAlergico().equals("si")){
+           cmbAlergico.setSelectedIndex(1);
+       }
+       else{
+           if(masco.getAlergico().equals("no"))
+               cmbAlergico.setSelectedIndex(2);
+       }
+       
+       if(masco.getAtencion_especial().equals("si")){
+           cmbAtencionEspecial.setSelectedIndex(1);
+       }
+       else{
+           if(masco.getAtencion_especial().equals("no"))
+               cmbAtencionEspecial.setSelectedIndex(2);
+       }
+       
+       }
+        
+        
+       }
+        
+
+
+
